@@ -1,42 +1,26 @@
 grammar LTL;
 
-@header {
-   package ltl2rabin.parser;
-}
-
 formula
-    : 'F' formula                   # formulaf
-    | 'G' formula                   # formulag
-    | 'X' formula                   # formulax
-    | orformula                     # formulaorformula
-    | atom                          # formulaatom
+    : '!' formula                   # negationFormula
+    | formula '/\\' formula         # conjunctionFormula
+    | formula '\\/' formula         # disjunctionFormula
+    | formula '->' formula          # implicationFormula
+    | 'X' formula                   # nextFormula
+    | 'G' formula                   # alwaysFormula
+    | 'F' formula                   # eventuallyFormula
+    | formula 'U' formula           # untilFormula
+    | atom                          # atomFormula
     ;
 
-orformula
-    : andformula ('|' andformula)*
-    ;
-
-andformula
-    : uformula ('&' uformula)*
-    ;
-
-uformula
-    : atom ('U' atom)?
-    ;
 
 atom
-    : '(' formula ')'
-    | Boolean
-    | Identifier
+    : '(' formula ')'               #subformulaAtom
+    | Constant                      #constantAtom
+    | Identifier                    #variableAtom
     ;
 
-Boolean
-    : 'tt'
-    | 'ff'
-    ;
+Constant: TRUE | FALSE;
+TRUE : 'true';
+FALSE : 'false';
 
-Identifier
-    : '!'?[a-zA-Z]+
-    ;
-
-WS : [ \t\n\r]+ -> skip ;
+Identifier : [a-zA-Z]+;
