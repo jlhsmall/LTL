@@ -20,7 +20,7 @@ public class TransitionSystem {
     ArrayList<Integer> initial = new ArrayList<>();
     HashMap<Integer,Integer> ActMap = new HashMap<>();
     ArrayList<String> AP=new ArrayList<>();
-    ArrayList<State> States;
+    ArrayList<State> States=new ArrayList<>();
     private ArrayList<Integer> ReadIntegerLine(BufferedReader br) throws IOException {
         ArrayList<Integer> ret = new ArrayList<>();
         String s = br.readLine();
@@ -62,8 +62,8 @@ public class TransitionSystem {
         return ret;
     }
 
-    public void in() throws IOException {
-        FileReader fr = new FileReader("input.txt");
+    public TransitionSystem(String file) throws IOException {
+        FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
 
         ArrayList<Integer> line=ReadIntegerLine(br);
@@ -77,7 +77,9 @@ public class TransitionSystem {
         }
 
         AP = ReadStringLine(br);
-        States = new ArrayList<>(S);
+
+        for(int i=0;i<S;++i)
+            States.add(new State());
         for (int i=0;i<T;++i){
             line = ReadIntegerLine(br);
             State s=States.get(line.get(0)),t=States.get(line.get(2));
