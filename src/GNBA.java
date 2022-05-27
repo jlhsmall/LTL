@@ -3,19 +3,19 @@ import AST.NextNode;
 import AST.UntilNode;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 
 public class GNBA {
     public class State{
-        public HashMap<ASTNode,Boolean>B;
+        public LinkedHashMap<ASTNode,Boolean>B;
         ArrayList<State>Successors=new ArrayList<>();
-        public State(HashMap<ASTNode,Boolean>B){
+        public State(LinkedHashMap<ASTNode,Boolean>B){
             this.B=B;
         }
     }
-    public HashSet<State>Q=new HashSet<>(),Q0=new HashSet<>();
-    public HashSet<HashSet<State>>F=new HashSet<>();
+    public LinkedHashSet<State>Q=new LinkedHashSet<>(),Q0=new LinkedHashSet<>();
+    public LinkedHashSet<LinkedHashSet<State>>F=new LinkedHashSet<>();
     public GNBA(ASTNode root){
         for (var mp : root.FormulaValue){
             State s=new State(mp);
@@ -44,7 +44,7 @@ public class GNBA {
         }
         for(var formula : root.FormulaValue.iterator().next().keySet()){
             if (formula instanceof UntilNode){
-                HashSet<State>f=new HashSet<>();
+                LinkedHashSet<State>f=new LinkedHashSet<>();
                 ASTNode phi2 = ((UntilNode)formula).right;
                 for(var s : Q){
                     if(!(s.B.get(formula)&&!s.B.get(phi2)))

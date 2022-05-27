@@ -18,7 +18,14 @@ public class Main {
             LTLLexer lexer = new LTLLexer(CharStreams.fromStream(formula));
             LTLParser parser = new LTLParser(new CommonTokenStream(lexer));
             ASTBuilder builder = new ASTBuilder(parser.formula());
+            System.out.println(builder.root.FormulaValue.size());
             GNBA gnba=new GNBA(builder.root);
+            for(var mp : builder.root.FormulaValue){
+                for(var entry : mp.entrySet()){
+                    System.out.print("("+entry.getKey().text+","+entry.getValue()+") ");
+                }
+                System.out.println();
+            }
         //}
         //catch (Exception e){
         //    System.out.println(e);

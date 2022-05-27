@@ -4,7 +4,7 @@ import gen.LTLBaseVisitor;
 import gen.LTLParser.*;
 import AST.*;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class ASTBuilder extends LTLBaseVisitor<ASTNode> {
     static ConstantNode TrueConstant=new ConstantNode(true, "true"),FalseConstant=new ConstantNode(false,"false");
@@ -93,7 +93,7 @@ public class ASTBuilder extends LTLBaseVisitor<ASTNode> {
     @Override
     public ASTNode visitVariableAtom(VariableAtomContext ctx){
         VariableNode Variable = new VariableNode(ctx.Identifier().getText());
-        HashMap<ASTNode,Boolean> mp0=new HashMap<>(), mp1=new HashMap<>();
+        LinkedHashMap<ASTNode,Boolean> mp0=new LinkedHashMap<>(), mp1=new LinkedHashMap<>();
         mp0.put(Variable,false);
         mp1.put(Variable,true);
         Variable.FormulaValue.add(mp0);

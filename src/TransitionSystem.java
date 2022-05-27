@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class TransitionSystem {
     public class State{
@@ -18,7 +18,7 @@ public class TransitionSystem {
     }
     int S, T;
     ArrayList<Integer> initial = new ArrayList<>();
-    HashMap<Integer,Integer> ActMap = new HashMap<>();
+    LinkedHashMap<Integer,Integer> ActMap = new LinkedHashMap<>();
     ArrayList<String> AP=new ArrayList<>();
     ArrayList<State> States=new ArrayList<>();
     private ArrayList<Integer> ReadIntegerLine(BufferedReader br) throws IOException {

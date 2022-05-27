@@ -1,7 +1,6 @@
 package AST;
 
-import java.util.HashMap;
-
+import java.util.LinkedHashMap;
 public class NegationNode extends ASTNode{
     public ASTNode NegationFormula;
     public NegationNode(ASTNode formula){
@@ -14,7 +13,7 @@ public class NegationNode extends ASTNode{
             isNegation = true;
         }
         for (var mp : formula.FormulaValue) {
-            HashMap<ASTNode, Boolean> cur_mp = new HashMap<>(mp);
+            LinkedHashMap<ASTNode, Boolean> cur_mp = new LinkedHashMap<>(mp);
             cur_mp.put(this, !mp.get(formula));
             FormulaValue.add(cur_mp);
         }

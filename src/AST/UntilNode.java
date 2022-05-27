@@ -1,6 +1,6 @@
 package AST;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class UntilNode extends ASTNode{
     public ASTNode left,right;
@@ -10,11 +10,11 @@ public class UntilNode extends ASTNode{
         this.right=right;
         for(var left_mp : left.FormulaValue){
             for(var right_mp:right.FormulaValue){
-                HashMap<ASTNode,Boolean>cur_mp=new HashMap<>(left_mp);
+                LinkedHashMap<ASTNode,Boolean>cur_mp=new LinkedHashMap<>(left_mp);
                 boolean flag = true;
                 for(var entry : right_mp.entrySet()){
                     if(cur_mp.containsKey(entry.getKey())){
-                        if(cur_mp.get(entry.getKey())){
+                        if(!cur_mp.get(entry.getKey()).equals(entry.getValue())){
                             flag = false; break;
                         }
                     }else{
@@ -24,6 +24,11 @@ public class UntilNode extends ASTNode{
                 if(flag){
                     cur_mp.put(this,left_mp.get(left)||right_mp.get(right));
                     FormulaValue.add(cur_mp);
+                    if(left_mp.get(left)&&!right_mp.get(right)){
+                        LinkedHashMap<ASTNode,Boolean>cur_mp2=new LinkedHashMap<>(cur_mp);
+                        cur_mp2.put(this,false);
+                        FormulaValue.add(cur_mp2);
+                    }
                 }
             }
         }
