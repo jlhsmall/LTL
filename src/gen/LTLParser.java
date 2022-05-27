@@ -17,7 +17,7 @@ public class LTLParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
-		T__9=10, Constant=11, TRUE=12, FALSE=13, Identifier=14;
+		T__9=10, Constant=11, TRUE=12, FALSE=13, Identifier=14, Space=15;
 	public static final int
 		RULE_formula = 0, RULE_atom = 1;
 	private static String[] makeRuleNames() {
@@ -37,7 +37,7 @@ public class LTLParser extends Parser {
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, null, null, null, null, null, null, null, null, null, null, "Constant", 
-			"TRUE", "FALSE", "Identifier"
+			"TRUE", "FALSE", "Identifier", "Space"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -580,7 +580,7 @@ public class LTLParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\u000e*\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0001"+
+		"\u0004\u0001\u000f*\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0001"+
 		"\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0001"+
 		"\u0000\u0001\u0000\u0003\u0000\r\b\u0000\u0001\u0000\u0001\u0000\u0001"+
 		"\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0001"+

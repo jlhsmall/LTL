@@ -24,3 +24,5 @@ TRUE : 'true';
 FALSE : 'false';
 
 Identifier : [a-zA-Z]+;
+
+Space : [ \t]+ -> skip;

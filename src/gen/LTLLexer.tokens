@@ -12,6 +12,7 @@ Constant=11
 TRUE=12
 FALSE=13
 Identifier=14
+Space=15
 '/\\'=1
 '\\/'=2
 '->'=3

@@ -8,6 +8,27 @@ import java.util.HashMap;
 
 public class ASTBuilder extends LTLBaseVisitor<ASTNode> {
     static ConstantNode TrueConstant=new ConstantNode(true, "true"),FalseConstant=new ConstantNode(false,"false");
+    public ASTNode root;
+    public ASTBuilder(FormulaContext ctx) throws Exception {
+        if(ctx instanceof NextFormulaContext)
+            root = visitNextFormula((NextFormulaContext) ctx);
+        else if(ctx instanceof EventuallyFormulaContext)
+            root = visitEventuallyFormula((EventuallyFormulaContext) ctx);
+        else if(ctx instanceof AlwaysFormulaContext)
+            root = visitAlwaysFormula((AlwaysFormulaContext) ctx);
+        else if(ctx instanceof AtomFormulaContext)
+            root = visitAtomFormula((AtomFormulaContext) ctx);
+        else if(ctx instanceof ImplicationFormulaContext)
+            root = visitImplicationFormula((ImplicationFormulaContext) ctx);
+        else if(ctx instanceof ConjunctionFormulaContext)
+            root = visitConjunctionFormula((ConjunctionFormulaContext) ctx);
+        else if(ctx instanceof UntilFormulaContext)
+            root = visitUntilFormula((UntilFormulaContext) ctx);
+        else if(ctx instanceof DisjunctionFormulaContext)
+            root = visitDisjunctionFormula((DisjunctionFormulaContext) ctx);
+        else
+             throw new Exception("No such formula.");
+    }
     @Override
     public ASTNode visitNextFormula(NextFormulaContext ctx){
         ASTNode formula = visit(ctx.formula());
@@ -60,7 +81,7 @@ public class ASTBuilder extends LTLBaseVisitor<ASTNode> {
     }
     @Override
     public ASTNode visitSubformulaAtom(SubformulaAtomContext ctx){
-        return visitChildren(ctx);
+        return visit(ctx.formula());
     }
     @Override
     public ASTNode visitConstantAtom(ConstantAtomContext ctx){
