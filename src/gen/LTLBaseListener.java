@@ -1,4 +1,4 @@
-// Generated from D:/projects/LTL/src\LTL.g4 by ANTLR 4.10.1
+package gen;// Generated from D:/projects/LTL/src\LTL.g4 by ANTLR 4.10.1
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -22,18 +22,6 @@ public class LTLBaseListener implements LTLListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitNextFormula(LTLParser.NextFormulaContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterNegationFormula(LTLParser.NegationFormulaContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitNegationFormula(LTLParser.NegationFormulaContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -118,6 +106,18 @@ public class LTLBaseListener implements LTLListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDisjunctionFormula(LTLParser.DisjunctionFormulaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterNegationAtom(LTLParser.NegationAtomContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNegationAtom(LTLParser.NegationAtomContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

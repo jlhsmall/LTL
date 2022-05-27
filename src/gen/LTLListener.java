@@ -1,4 +1,4 @@
-// Generated from D:/projects/LTL/src\LTL.g4 by ANTLR 4.10.1
+package gen;// Generated from D:/projects/LTL/src\LTL.g4 by ANTLR 4.10.1
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -18,18 +18,6 @@ public interface LTLListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitNextFormula(LTLParser.NextFormulaContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code negationFormula}
-	 * labeled alternative in {@link LTLParser#formula}.
-	 * @param ctx the parse tree
-	 */
-	void enterNegationFormula(LTLParser.NegationFormulaContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code negationFormula}
-	 * labeled alternative in {@link LTLParser#formula}.
-	 * @param ctx the parse tree
-	 */
-	void exitNegationFormula(LTLParser.NegationFormulaContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code eventuallyFormula}
 	 * labeled alternative in {@link LTLParser#formula}.
@@ -114,6 +102,18 @@ public interface LTLListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDisjunctionFormula(LTLParser.DisjunctionFormulaContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code negationAtom}
+	 * labeled alternative in {@link LTLParser#atom}.
+	 * @param ctx the parse tree
+	 */
+	void enterNegationAtom(LTLParser.NegationAtomContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code negationAtom}
+	 * labeled alternative in {@link LTLParser#atom}.
+	 * @param ctx the parse tree
+	 */
+	void exitNegationAtom(LTLParser.NegationAtomContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code subformulaAtom}
 	 * labeled alternative in {@link LTLParser#atom}.

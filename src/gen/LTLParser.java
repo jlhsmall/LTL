@@ -1,4 +1,4 @@
-// Generated from D:/projects/LTL/src\LTL.g4 by ANTLR 4.10.1
+package gen;// Generated from D:/projects/LTL/src\LTL.g4 by ANTLR 4.10.1
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -29,7 +29,7 @@ public class LTLParser extends Parser {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'!'", "'/\\'", "'\\/'", "'->'", "'X'", "'G'", "'F'", "'U'", "'('", 
+			null, "'/\\'", "'\\/'", "'->'", "'X'", "'G'", "'F'", "'U'", "'!'", "'('", 
 			"')'", null, "'true'", "'false'"
 		};
 	}
@@ -118,25 +118,6 @@ public class LTLParser extends Parser {
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof LTLVisitor ) return ((LTLVisitor<? extends T>)visitor).visitNextFormula(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class NegationFormulaContext extends FormulaContext {
-		public FormulaContext formula() {
-			return getRuleContext(FormulaContext.class,0);
-		}
-		public NegationFormulaContext(FormulaContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LTLListener ) ((LTLListener)listener).enterNegationFormula(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LTLListener ) ((LTLListener)listener).exitNegationFormula(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LTLVisitor ) return ((LTLVisitor<? extends T>)visitor).visitNegationFormula(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -301,54 +282,44 @@ public class LTLParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(14);
+			setState(12);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case T__0:
+			case T__3:
 				{
-				_localctx = new NegationFormulaContext(_localctx);
+				_localctx = new NextFormulaContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 
 				setState(5);
-				match(T__0);
+				match(T__3);
 				setState(6);
-				formula(9);
+				formula(5);
 				}
 				break;
 			case T__4:
 				{
-				_localctx = new NextFormulaContext(_localctx);
+				_localctx = new AlwaysFormulaContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(7);
 				match(T__4);
 				setState(8);
-				formula(5);
+				formula(4);
 				}
 				break;
 			case T__5:
 				{
-				_localctx = new AlwaysFormulaContext(_localctx);
+				_localctx = new EventuallyFormulaContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(9);
 				match(T__5);
 				setState(10);
-				formula(4);
-				}
-				break;
-			case T__6:
-				{
-				_localctx = new EventuallyFormulaContext(_localctx);
-				_ctx = _localctx;
-				_prevctx = _localctx;
-				setState(11);
-				match(T__6);
-				setState(12);
 				formula(3);
 				}
 				break;
+			case T__7:
 			case T__8:
 			case Constant:
 			case Identifier:
@@ -356,7 +327,7 @@ public class LTLParser extends Parser {
 				_localctx = new AtomFormulaContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(13);
+				setState(11);
 				atom();
 				}
 				break;
@@ -364,7 +335,7 @@ public class LTLParser extends Parser {
 				throw new NoViableAltException(this);
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(30);
+			setState(28);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,2,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -372,18 +343,18 @@ public class LTLParser extends Parser {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(28);
+					setState(26);
 					_errHandler.sync(this);
 					switch ( getInterpreter().adaptivePredict(_input,1,_ctx) ) {
 					case 1:
 						{
 						_localctx = new ConjunctionFormulaContext(new FormulaContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_formula);
-						setState(16);
+						setState(14);
 						if (!(precpred(_ctx, 8))) throw new FailedPredicateException(this, "precpred(_ctx, 8)");
-						setState(17);
-						match(T__1);
-						setState(18);
+						setState(15);
+						match(T__0);
+						setState(16);
 						formula(9);
 						}
 						break;
@@ -391,11 +362,11 @@ public class LTLParser extends Parser {
 						{
 						_localctx = new DisjunctionFormulaContext(new FormulaContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_formula);
-						setState(19);
+						setState(17);
 						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
-						setState(20);
-						match(T__2);
-						setState(21);
+						setState(18);
+						match(T__1);
+						setState(19);
 						formula(8);
 						}
 						break;
@@ -403,11 +374,11 @@ public class LTLParser extends Parser {
 						{
 						_localctx = new ImplicationFormulaContext(new FormulaContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_formula);
-						setState(22);
+						setState(20);
 						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
-						setState(23);
-						match(T__3);
-						setState(24);
+						setState(21);
+						match(T__2);
+						setState(22);
 						formula(7);
 						}
 						break;
@@ -415,18 +386,18 @@ public class LTLParser extends Parser {
 						{
 						_localctx = new UntilFormulaContext(new FormulaContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_formula);
-						setState(25);
+						setState(23);
 						if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
-						setState(26);
-						match(T__7);
-						setState(27);
+						setState(24);
+						match(T__6);
+						setState(25);
 						formula(3);
 						}
 						break;
 					}
 					} 
 				}
-				setState(32);
+				setState(30);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,2,_ctx);
 			}
@@ -507,6 +478,25 @@ public class LTLParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	public static class NegationAtomContext extends AtomContext {
+		public FormulaContext formula() {
+			return getRuleContext(FormulaContext.class,0);
+		}
+		public NegationAtomContext(AtomContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof LTLListener ) ((LTLListener)listener).enterNegationAtom(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof LTLListener ) ((LTLListener)listener).exitNegationAtom(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof LTLVisitor ) return ((LTLVisitor<? extends T>)visitor).visitNegationAtom(this);
+			else return visitor.visitChildren(this);
+		}
+	}
 
 	public final AtomContext atom() throws RecognitionException {
 		AtomContext _localctx = new AtomContext(_ctx, getState());
@@ -515,9 +505,19 @@ public class LTLParser extends Parser {
 			setState(39);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
+			case T__7:
+				_localctx = new NegationAtomContext(_localctx);
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(31);
+				match(T__7);
+				setState(32);
+				formula(0);
+				}
+				break;
 			case T__8:
 				_localctx = new SubformulaAtomContext(_localctx);
-				enterOuterAlt(_localctx, 1);
+				enterOuterAlt(_localctx, 2);
 				{
 				setState(33);
 				match(T__8);
@@ -529,7 +529,7 @@ public class LTLParser extends Parser {
 				break;
 			case Constant:
 				_localctx = new ConstantAtomContext(_localctx);
-				enterOuterAlt(_localctx, 2);
+				enterOuterAlt(_localctx, 3);
 				{
 				setState(37);
 				match(Constant);
@@ -537,7 +537,7 @@ public class LTLParser extends Parser {
 				break;
 			case Identifier:
 				_localctx = new VariableAtomContext(_localctx);
-				enterOuterAlt(_localctx, 3);
+				enterOuterAlt(_localctx, 4);
 				{
 				setState(38);
 				match(Identifier);
@@ -582,35 +582,34 @@ public class LTLParser extends Parser {
 	public static final String _serializedATN =
 		"\u0004\u0001\u000e*\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0001"+
 		"\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0001"+
-		"\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0003\u0000\u000f\b\u0000\u0001"+
+		"\u0000\u0001\u0000\u0003\u0000\r\b\u0000\u0001\u0000\u0001\u0000\u0001"+
 		"\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0001"+
-		"\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0005"+
-		"\u0000\u001d\b\u0000\n\u0000\f\u0000 \t\u0000\u0001\u0001\u0001\u0001"+
-		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0003\u0001(\b\u0001"+
-		"\u0001\u0001\u0000\u0001\u0000\u0002\u0000\u0002\u0000\u00001\u0000\u000e"+
-		"\u0001\u0000\u0000\u0000\u0002\'\u0001\u0000\u0000\u0000\u0004\u0005\u0006"+
-		"\u0000\uffff\uffff\u0000\u0005\u0006\u0005\u0001\u0000\u0000\u0006\u000f"+
-		"\u0003\u0000\u0000\t\u0007\b\u0005\u0005\u0000\u0000\b\u000f\u0003\u0000"+
-		"\u0000\u0005\t\n\u0005\u0006\u0000\u0000\n\u000f\u0003\u0000\u0000\u0004"+
-		"\u000b\f\u0005\u0007\u0000\u0000\f\u000f\u0003\u0000\u0000\u0003\r\u000f"+
-		"\u0003\u0002\u0001\u0000\u000e\u0004\u0001\u0000\u0000\u0000\u000e\u0007"+
-		"\u0001\u0000\u0000\u0000\u000e\t\u0001\u0000\u0000\u0000\u000e\u000b\u0001"+
-		"\u0000\u0000\u0000\u000e\r\u0001\u0000\u0000\u0000\u000f\u001e\u0001\u0000"+
-		"\u0000\u0000\u0010\u0011\n\b\u0000\u0000\u0011\u0012\u0005\u0002\u0000"+
-		"\u0000\u0012\u001d\u0003\u0000\u0000\t\u0013\u0014\n\u0007\u0000\u0000"+
-		"\u0014\u0015\u0005\u0003\u0000\u0000\u0015\u001d\u0003\u0000\u0000\b\u0016"+
-		"\u0017\n\u0006\u0000\u0000\u0017\u0018\u0005\u0004\u0000\u0000\u0018\u001d"+
-		"\u0003\u0000\u0000\u0007\u0019\u001a\n\u0002\u0000\u0000\u001a\u001b\u0005"+
-		"\b\u0000\u0000\u001b\u001d\u0003\u0000\u0000\u0003\u001c\u0010\u0001\u0000"+
-		"\u0000\u0000\u001c\u0013\u0001\u0000\u0000\u0000\u001c\u0016\u0001\u0000"+
-		"\u0000\u0000\u001c\u0019\u0001\u0000\u0000\u0000\u001d \u0001\u0000\u0000"+
-		"\u0000\u001e\u001c\u0001\u0000\u0000\u0000\u001e\u001f\u0001\u0000\u0000"+
-		"\u0000\u001f\u0001\u0001\u0000\u0000\u0000 \u001e\u0001\u0000\u0000\u0000"+
-		"!\"\u0005\t\u0000\u0000\"#\u0003\u0000\u0000\u0000#$\u0005\n\u0000\u0000"+
-		"$(\u0001\u0000\u0000\u0000%(\u0005\u000b\u0000\u0000&(\u0005\u000e\u0000"+
-		"\u0000\'!\u0001\u0000\u0000\u0000\'%\u0001\u0000\u0000\u0000\'&\u0001"+
-		"\u0000\u0000\u0000(\u0003\u0001\u0000\u0000\u0000\u0004\u000e\u001c\u001e"+
-		"\'";
+		"\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0005\u0000\u001b\b\u0000\n"+
+		"\u0000\f\u0000\u001e\t\u0000\u0001\u0001\u0001\u0001\u0001\u0001\u0001"+
+		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0003\u0001(\b"+
+		"\u0001\u0001\u0001\u0000\u0001\u0000\u0002\u0000\u0002\u0000\u00001\u0000"+
+		"\f\u0001\u0000\u0000\u0000\u0002\'\u0001\u0000\u0000\u0000\u0004\u0005"+
+		"\u0006\u0000\uffff\uffff\u0000\u0005\u0006\u0005\u0004\u0000\u0000\u0006"+
+		"\r\u0003\u0000\u0000\u0005\u0007\b\u0005\u0005\u0000\u0000\b\r\u0003\u0000"+
+		"\u0000\u0004\t\n\u0005\u0006\u0000\u0000\n\r\u0003\u0000\u0000\u0003\u000b"+
+		"\r\u0003\u0002\u0001\u0000\f\u0004\u0001\u0000\u0000\u0000\f\u0007\u0001"+
+		"\u0000\u0000\u0000\f\t\u0001\u0000\u0000\u0000\f\u000b\u0001\u0000\u0000"+
+		"\u0000\r\u001c\u0001\u0000\u0000\u0000\u000e\u000f\n\b\u0000\u0000\u000f"+
+		"\u0010\u0005\u0001\u0000\u0000\u0010\u001b\u0003\u0000\u0000\t\u0011\u0012"+
+		"\n\u0007\u0000\u0000\u0012\u0013\u0005\u0002\u0000\u0000\u0013\u001b\u0003"+
+		"\u0000\u0000\b\u0014\u0015\n\u0006\u0000\u0000\u0015\u0016\u0005\u0003"+
+		"\u0000\u0000\u0016\u001b\u0003\u0000\u0000\u0007\u0017\u0018\n\u0002\u0000"+
+		"\u0000\u0018\u0019\u0005\u0007\u0000\u0000\u0019\u001b\u0003\u0000\u0000"+
+		"\u0003\u001a\u000e\u0001\u0000\u0000\u0000\u001a\u0011\u0001\u0000\u0000"+
+		"\u0000\u001a\u0014\u0001\u0000\u0000\u0000\u001a\u0017\u0001\u0000\u0000"+
+		"\u0000\u001b\u001e\u0001\u0000\u0000\u0000\u001c\u001a\u0001\u0000\u0000"+
+		"\u0000\u001c\u001d\u0001\u0000\u0000\u0000\u001d\u0001\u0001\u0000\u0000"+
+		"\u0000\u001e\u001c\u0001\u0000\u0000\u0000\u001f \u0005\b\u0000\u0000"+
+		" (\u0003\u0000\u0000\u0000!\"\u0005\t\u0000\u0000\"#\u0003\u0000\u0000"+
+		"\u0000#$\u0005\n\u0000\u0000$(\u0001\u0000\u0000\u0000%(\u0005\u000b\u0000"+
+		"\u0000&(\u0005\u000e\u0000\u0000\'\u001f\u0001\u0000\u0000\u0000\'!\u0001"+
+		"\u0000\u0000\u0000\'%\u0001\u0000\u0000\u0000\'&\u0001\u0000\u0000\u0000"+
+		"(\u0003\u0001\u0000\u0000\u0000\u0004\f\u001a\u001c\'";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

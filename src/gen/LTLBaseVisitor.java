@@ -1,4 +1,4 @@
-// Generated from D:/projects/LTL/src\LTL.g4 by ANTLR 4.10.1
+package gen;// Generated from D:/projects/LTL/src\LTL.g4 by ANTLR 4.10.1
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
@@ -17,13 +17,6 @@ public class LTLBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements LT
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitNextFormula(LTLParser.NextFormulaContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitNegationFormula(LTLParser.NegationFormulaContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -73,6 +66,13 @@ public class LTLBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements LT
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitDisjunctionFormula(LTLParser.DisjunctionFormulaContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitNegationAtom(LTLParser.NegationAtomContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

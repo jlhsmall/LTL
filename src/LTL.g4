@@ -1,8 +1,7 @@
 grammar LTL;
 
 formula
-    : '!' formula                   # negationFormula
-    | formula '/\\' formula         # conjunctionFormula
+    : formula '/\\' formula         # conjunctionFormula
     | formula '\\/' formula         # disjunctionFormula
     | formula '->' formula          # implicationFormula
     | 'X' formula                   # nextFormula
@@ -14,7 +13,8 @@ formula
 
 
 atom
-    : '(' formula ')'               #subformulaAtom
+    : '!' formula                   # negationAtom
+    | '(' formula ')'               #subformulaAtom
     | Constant                      #constantAtom
     | Identifier                    #variableAtom
     ;

@@ -1,4 +1,4 @@
-// Generated from D:/projects/LTL/src\LTL.g4 by ANTLR 4.10.1
+package gen;// Generated from D:/projects/LTL/src\LTL.g4 by ANTLR 4.10.1
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -16,13 +16,6 @@ public interface LTLVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitNextFormula(LTLParser.NextFormulaContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code negationFormula}
-	 * labeled alternative in {@link LTLParser#formula}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitNegationFormula(LTLParser.NegationFormulaContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code eventuallyFormula}
 	 * labeled alternative in {@link LTLParser#formula}.
@@ -72,6 +65,13 @@ public interface LTLVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitDisjunctionFormula(LTLParser.DisjunctionFormulaContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code negationAtom}
+	 * labeled alternative in {@link LTLParser#atom}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNegationAtom(LTLParser.NegationAtomContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code subformulaAtom}
 	 * labeled alternative in {@link LTLParser#atom}.
