@@ -4,90 +4,100 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 
 public class TransitionSystem {
-    public class State{
+    public class State {
         ArrayList<State> Successors = new ArrayList<>();
         ArrayList<Integer> Actions = new ArrayList<>();
-        ArrayList<Integer> L = new ArrayList<>();
-        public void addTransition(int a,State t){
+        LinkedHashSet<String> L = new LinkedHashSet<>();
+        int index;
+        public void addTransition(int a, State t) {
             Successors.add(t);
             Actions.add(a);
         }
     }
-    int S, T;
-    ArrayList<Integer> initial = new ArrayList<>();
-    LinkedHashMap<Integer,Integer> ActMap = new LinkedHashMap<>();
-    ArrayList<String> AP=new ArrayList<>();
-    ArrayList<State> States=new ArrayList<>();
-    private ArrayList<Integer> ReadIntegerLine(BufferedReader br) throws IOException {
-        ArrayList<Integer> ret = new ArrayList<>();
-        String s = br.readLine();
-        int x=0;
-        boolean flg = false;
-        for (int i = 0; i < s.length(); ++i) {
-            char cur = s.charAt(i);
-            if (cur >= '0' && cur <= '9') {
-                flg = true;
-                x = x * 10 + cur - '0';
-            } else if (flg) {
-                ret.add(x);
-                x = 0;
-                flg = false;
-            }
-        }
-        if(flg)
-            ret.add(x);
-        return ret;
-    }
 
-    private ArrayList<String> ReadStringLine(BufferedReader br) throws IOException {
-        ArrayList<String> ret = new ArrayList<>();
-        String s = br.readLine();
-        StringBuilder sb = new StringBuilder();
-        boolean flg = false;
-        for (int i = 0; i < s.length(); ++i) {
-            char cur = s.charAt(i);
-            if (cur >= 'a' && cur <= 'z' || cur >= 'A' && cur <= 'Z')
-                sb.append(cur);
-            else if (flg){
-                ret.add(sb.toString());
-                sb = new StringBuilder();
-                flg = false;
-            }
-        }
-        if (flg)
-            ret.add(sb.toString());
-        return ret;
-    }
+    ArrayList<State> initial = new ArrayList<>();
+    LinkedHashMap<Integer, Integer> ActMap = new LinkedHashMap<>();
+    ArrayList<String> AP = new ArrayList<>();
+    State[] States;
 
+    //parser
     public TransitionSystem(String file) throws IOException {
         FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
 
-        ArrayList<Integer> line=ReadIntegerLine(br);
-        S=line.get(0);T=line.get(1);
+        ArrayList<Integer> line = MyInput.ReadIntegerLine(br);
+        int S = line.get(0), T = line.get(1);
+        States = new State[S];
+        for(int i=0;i<S;++i)States[i].index=i;
 
-        initial = ReadIntegerLine(br);
+        line = MyInput.ReadIntegerLine(br);
+        for(int i : line)initial.add(States[i]);
 
-        line = ReadIntegerLine(br);
-        for(int i=0;i<line.size();++i){
-            ActMap.put(line.get(i),i);
+        line = MyInput.ReadIntegerLine(br);
+        for (int i = 0; i < line.size(); ++i) {
+            ActMap.put(line.get(i), i);
         }
 
-        AP = ReadStringLine(br);
+        AP = MyInput.ReadStringLine(br);
 
-        for(int i=0;i<S;++i)
-            States.add(new State());
-        for (int i=0;i<T;++i){
-            line = ReadIntegerLine(br);
-            State s=States.get(line.get(0)),t=States.get(line.get(2));
+        for (int i = 0; i < T; ++i) {
+            line = MyInput.ReadIntegerLine(br);
+            State s = States[line.get(0)], t = States[line.get(2)];
             int a = line.get(1);
-            s.addTransition(a,t);
+            s.addTransition(a, t);
         }
 
-        for (int i=0;i<S;++i)
-            States.get(i).L = ReadIntegerLine(br);
+        for (int i = 0; i < S; ++i) {
+            line = MyInput.ReadIntegerLine(br);
+            for(int j : line)
+                States[i].L.add(AP.get(j));
+        }
+    }
+    boolean same(LinkedHashSet<String>s1,LinkedHashSet<String>s2){
+        if(s1.size()!=s2.size())return false;
+        for(var s : s1)if(!s2.contains(s1))return false;
+        return true;
+    }
+    public TransitionSystem(TransitionSystem TS, NBA A) {
+        int S = TS.States.length, Q = A.Q.length;
+        State[][] States = new State[S][Q];
+        this.States=new State[S*Q];
+        for(int i=0;i<S*Q;++i)this.States[i].index=i;
+        for(int i=0;i<S;++i)for(int j=0;j<Q;++j)this.States[i*Q+j]=States[i][j];
+        ActMap=TS.ActMap;
+        for(int i=0;i<S;++i)for(int j=0;j<Q;++j){
+            State s=TS.States[i];
+            NBA.State q=A.Q[j];
+            for(int h=0;h<s.Successors.size();++h){
+                State t=s.Successors.get(h);
+                for(int k=0;k<q.Successors.size();++k) {
+                    if (same(t.L, q.labels.get(k))) {
+                        for (var p : q.Successors.get(k)){
+                            States[i][j].addTransition(s.Actions.get(h),States[t.index][p.j]);
+                        }
+                    }
+                }
+            }
+        }
+        for(var s : TS.initial){
+            for(var qp : A.Q)if(qp.isInitial){
+                for(int k=0;k<qp.Successors.size();++k){
+                    if(same(s.L,qp.labels.get(k))){
+                        for(var q : qp.Successors.get(k)){
+                            initial.add(States[s.index][q.j]);
+                        }
+                    }
+                }
+            }
+        }
+        for(var q : A.Q)AP.add(q.toString());
+        for(int i=0;i<S;++i)for(int j=0;j<Q;++j){
+            States[i][j].L.add(A.Q[j].toString());
+        }
     }
 }
