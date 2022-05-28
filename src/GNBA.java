@@ -9,19 +9,22 @@ import java.util.LinkedHashSet;
 public class GNBA {
     public class State{
         public LinkedHashMap<ASTNode,Boolean>B;
+        public boolean isInitial;
+        public int index;
         ArrayList<State>Successors=new ArrayList<>();
         public State(LinkedHashMap<ASTNode,Boolean>B){
             this.B=B;
         }
     }
-    public LinkedHashSet<State>Q=new LinkedHashSet<>(),Q0=new LinkedHashSet<>();
-    public LinkedHashSet<LinkedHashSet<State>>F=new LinkedHashSet<>();
+    public ArrayList<State> Q = new ArrayList<>();
+    public ArrayList<LinkedHashSet<State>>F=new ArrayList<>();
     public GNBA(ASTNode root){
         for (var mp : root.FormulaValue){
             State s=new State(mp);
+            s.isInitial=mp.get(root);
             Q.add(s);
-            if(mp.get(root))Q0.add(s);
         }
+        for(int i=0;i<Q.size();++i)Q.get(i).index=i;
         for (var s : Q)for(var t : Q){
             boolean flag = true;
             for (var entry : s.B.entrySet()){
