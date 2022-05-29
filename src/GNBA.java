@@ -10,28 +10,39 @@ public class GNBA {
         public LinkedHashMap<ASTNode,Boolean>B;
         public boolean isInitial;
         public int index;
-        ArrayList<LinkedHashSet<State>>Successors=new ArrayList<>();
+        ArrayList<LinkedHashSet<State>> Successors=new ArrayList<>();
         ArrayList<LinkedHashSet<String>> labels= new ArrayList<>();
         public State(LinkedHashMap<ASTNode,Boolean>B){
             this.B=B;
         }
+        @Override
+        public String toString(){
+            return "q_"+index;
+        }
     }
     public ArrayList<State> Q = new ArrayList<>();
     public ArrayList<LinkedHashSet<State>>F=new ArrayList<>();
+    //GNBA from LTL
     public GNBA(ASTNode root){
+        //Q & Q0
         for (var mp : root.FormulaValue){
             State s=new State(mp);
             s.isInitial=mp.get(root);
             Q.add(s);
         }
+
         for(int i=0;i<Q.size();++i)Q.get(i).index=i;
+
+        //transition function
         for (var s : Q) {
+            //A=B conjunct AP
             LinkedHashSet<String>label=new LinkedHashSet<>();
-            for(var key : s.B.keySet()){
-                if(key instanceof VariableNode)
-                    label.add(key.text);
+            for(var entry : s.B.entrySet()){
+                if((entry.getKey() instanceof VariableNode)&&entry.getValue())
+                    label.add(entry.getKey().text);
             }
             s.labels.add(label);
+            //delta(B,A)
             LinkedHashSet<State>SuccessorSet=new LinkedHashSet<>();
             for (var t : Q) {
                 boolean flag = true;
@@ -67,5 +78,23 @@ public class GNBA {
                 F.add(f);
             }
         }
+    }
+    public void print(){
+        System.out.println("GNBA:");
+        for(var q : Q) {
+            System.out.print(q+": ");
+            for(var entry : q.B.entrySet()){
+                System.out.print("("+entry.getKey().text+","+entry.getValue()+") ");
+            }
+            System.out.println();
+        }
+        for(var q : Q) {
+            for(int i=0;i<q.Successors.size();++i)
+                System.out.print("("+q+","+ q.labels.get(i)+","+q.Successors.get(i)+");");
+            System.out.println();
+        }
+        System.out.print("F:");
+        for(var f : F)System.out.print(f+",");
+        System.out.println();System.out.println();
     }
 }

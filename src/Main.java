@@ -18,11 +18,14 @@ public class Main {
         LTLLexer lexer = new LTLLexer(CharStreams.fromStream(formula));
         LTLParser parser = new LTLParser(new CommonTokenStream(lexer));
         ASTBuilder builder = new ASTBuilder(parser.formula());
-        System.out.println(builder.root.FormulaValue.size());
+        //builder.printElementarySet();
         GNBA G = new GNBA(builder.root);
+        G.print();
         NBA A = new NBA(G);
         A.Complement();
+        A.print();
         TransitionSystem TSA = new TransitionSystem(TS, A);
+        TSA.print();
         System.out.println(TSA.isNFPersistent() ? "1" : "0");
     }
 
@@ -63,11 +66,6 @@ public class Main {
             TS.initial.add(TS.States[index]);
             solve(TS);
         }
-            /*for(var mp : builder.root.FormulaValue){
-                for(var entry : mp.entrySet()){
-                    System.out.print("("+entry.getKey().text+","+entry.getValue()+") ");
-                }
-                System.out.println();
-            }*/
+
     }
 }

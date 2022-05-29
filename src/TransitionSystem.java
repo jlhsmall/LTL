@@ -17,6 +17,10 @@ public class TransitionSystem {
             Successors.add(t);
             Actions.add(a);
         }
+        @Override
+        public String toString(){
+            return "s_"+index;
+        }
     }
 
     ArrayList<State> initial = new ArrayList<>();
@@ -68,7 +72,9 @@ public class TransitionSystem {
         return true;
     }
 
+    //product construction
     public TransitionSystem(TransitionSystem TS, NBA A) {
+        //S'=S*Q
         int S = TS.States.length, Q = A.Q.length;
         State[][] States = new State[S][Q];
         this.States = new State[S * Q];
@@ -77,7 +83,10 @@ public class TransitionSystem {
                 this.States[i * Q + j] = States[i][j]=new State();
                 this.States[i*Q+j].index=i*Q+j;
             }
+
         ActMap = TS.ActMap;
+
+        //transition
         for (int i = 0; i < S; ++i)
             for (int j = 0; j < Q; ++j) {
                 State s = TS.States[i];
@@ -87,7 +96,7 @@ public class TransitionSystem {
                     for (int k = 0; k < q.Successors.size(); ++k) {
                         if (same(t.L, q.labels.get(k))) {
                             for (var p : q.Successors.get(k)) {
-                                States[i][j].addTransition(s.Actions.get(h), States[t.index][p.j]);
+                                States[i][j].addTransition(s.Actions.get(h), States[t.index][p.index]);
                             }
                         }
                     }
@@ -99,7 +108,7 @@ public class TransitionSystem {
                     for (int k = 0; k < qp.Successors.size(); ++k) {
                         if (same(s.L, qp.labels.get(k))) {
                             for (var q : qp.Successors.get(k)) {
-                                initial.add(States[s.index][q.j]);
+                                initial.add(States[s.index][q.index]);
                             }
                         }
                     }
@@ -112,7 +121,7 @@ public class TransitionSystem {
             }
         for (int i = 0; i < S; ++i)
             for (var f : A.F)
-                F.add(States[i][f.j]);
+                F.add(States[i][f.index]);
     }
 
     private boolean DFS(State f, State s) {
@@ -121,10 +130,23 @@ public class TransitionSystem {
         for (var t : s.Successors) if (DFS(f, t)) return true;
         return false;
     }
-
+    //Check Persistency
     public boolean isNFPersistent() {
         for (var s : States) s.visit = -1;
         for (var f : F) if (DFS(f, f)) return true;
         return false;
+    }
+
+    public void print(){
+        System.out.print("Transition System:");
+        for(var s : initial)System.out.print(s+",");
+        System.out.println();
+        for(var s : States){
+            for(int i=0;i<s.Successors.size();++i){
+                System.out.print("("+s+","+s.Actions.get(i)+","+s.Successors.get(i)+");");
+            }
+            System.out.println();
+        }
+        System.out.println();
     }
 }

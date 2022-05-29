@@ -100,4 +100,15 @@ public class ASTBuilder extends LTLBaseVisitor<ASTNode> {
         Variable.FormulaValue.add(mp1);
         return Variable;
     }
+    public void printElementarySet(){
+        System.out.println("The elementary set:");
+        System.out.println("size="+root.FormulaValue.size());
+        for(var mp : root.FormulaValue){
+            for(var entry : mp.entrySet()){
+                System.out.print("("+entry.getKey().text+","+entry.getValue()+") ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
 }
