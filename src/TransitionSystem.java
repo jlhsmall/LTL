@@ -33,7 +33,10 @@ public class TransitionSystem {
         ArrayList<Integer> line = MyInput.ReadIntegerLine(br);
         int S = line.get(0), T = line.get(1);
         States = new State[S];
-        for (int i = 0; i < S; ++i) States[i].index = i;
+        for (int i = 0; i < S; ++i){
+            States[i]=new State();
+            States[i].index = i;
+        }
 
         line = MyInput.ReadIntegerLine(br);
         for (int i : line) initial.add(States[i]);
@@ -69,8 +72,11 @@ public class TransitionSystem {
         int S = TS.States.length, Q = A.Q.length;
         State[][] States = new State[S][Q];
         this.States = new State[S * Q];
-        for (int i = 0; i < S * Q; ++i) this.States[i].index = i;
-        for (int i = 0; i < S; ++i) for (int j = 0; j < Q; ++j) this.States[i * Q + j] = States[i][j];
+        for (int i = 0; i < S; ++i)
+            for (int j = 0; j < Q; ++j){
+                this.States[i * Q + j] = States[i][j]=new State();
+                this.States[i*Q+j].index=i*Q+j;
+            }
         ActMap = TS.ActMap;
         for (int i = 0; i < S; ++i)
             for (int j = 0; j < Q; ++j) {

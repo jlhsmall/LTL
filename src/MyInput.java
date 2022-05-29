@@ -31,9 +31,10 @@ public class MyInput {
         boolean flg = false;
         for (int i = 0; i < s.length(); ++i) {
             char cur = s.charAt(i);
-            if (cur >= 'a' && cur <= 'z' || cur >= 'A' && cur <= 'Z')
+            if (cur >= 'a' && cur <= 'z' || cur >= 'A' && cur <= 'Z') {
+                flg = true;
                 sb.append(cur);
-            else if (flg){
+            }else if (flg){
                 ret.add(sb.toString());
                 sb = new StringBuilder();
                 flg = false;
