@@ -68,7 +68,7 @@ public class TransitionSystem {
 
     boolean same(LinkedHashSet<String> s1, LinkedHashSet<String> s2) {
         if (s1.size() != s2.size()) return false;
-        for (var s : s1) if (!s2.contains(s1)) return false;
+        for (var s : s1) if (!s2.contains(s)) return false;
         return true;
     }
 
@@ -145,7 +145,6 @@ public class TransitionSystem {
             for(int i=0;i<s.Successors.size();++i){
                 System.out.print("("+s+","+s.Actions.get(i)+","+s.Successors.get(i)+");");
             }
-            System.out.println();
         }
         System.out.println();
     }
