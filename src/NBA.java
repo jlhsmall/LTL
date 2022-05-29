@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 
 public class NBA {
@@ -58,5 +59,10 @@ public class NBA {
         }
         this.Q=new State[k*l];
         for(int i=0;i<l;++i)for(int j=0;j<k;++j)this.Q[i*k+j]=Q[i][j];
+    }
+    public void Complement(){
+        LinkedHashSet<State> newF=new LinkedHashSet<>(Arrays.asList(Q));
+        newF.removeAll(F);
+        F=newF;
     }
 }

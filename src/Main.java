@@ -19,7 +19,10 @@ public class Main {
             LTLParser parser = new LTLParser(new CommonTokenStream(lexer));
             ASTBuilder builder = new ASTBuilder(parser.formula());
             System.out.println(builder.root.FormulaValue.size());
-            GNBA gnba=new GNBA(builder.root);
+            GNBA G=new GNBA(builder.root);
+            NBA A=new NBA(G);A.Complement();
+            TransitionSystem TSA=new TransitionSystem(TS,A);
+            System.out.println(TSA.isNFPersistent()?"1":"0");
             for(var mp : builder.root.FormulaValue){
                 for(var entry : mp.entrySet()){
                     System.out.print("("+entry.getKey().text+","+entry.getValue()+") ");
