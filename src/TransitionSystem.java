@@ -1,4 +1,7 @@
 
+import AST.ASTNode;
+import AST.VariableNode;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -11,8 +14,8 @@ public class TransitionSystem {
         ArrayList<Integer> Actions = new ArrayList<>();
         LinkedHashSet<String> L = new LinkedHashSet<>();
         int index;
-        int visit;
-
+        boolean visit1;
+        int visit2;
         public void addTransition(int a, State t) {
             Successors.add(t);
             Actions.add(a);
@@ -73,7 +76,12 @@ public class TransitionSystem {
     }
 
     //product construction
-    public TransitionSystem(TransitionSystem TS, NBA A) {
+    public TransitionSystem(TransitionSystem TS, NBA A, ASTNode root) {
+        //find correlated variables
+        LinkedHashSet<String>curAP=new LinkedHashSet<>();
+        for(var v : root.FormulaValue.iterator().next().keySet())
+            if(v instanceof VariableNode)
+                curAP.add(v.text);
         //S'=S*Q
         int S = TS.States.length, Q = A.Q.length;
         State[][] States = new State[S][Q];
@@ -94,7 +102,9 @@ public class TransitionSystem {
                 for (int h = 0; h < s.Successors.size(); ++h) {
                     State t = s.Successors.get(h);
                     for (int k = 0; k < q.Successors.size(); ++k) {
-                        if (same(t.L, q.labels.get(k))) {
+                        LinkedHashSet<String> st=new LinkedHashSet<>(t.L);
+                        st.retainAll(curAP);
+                        if (same(st, q.labels.get(k))) {
                             for (var p : q.Successors.get(k)) {
                                 States[i][j].addTransition(s.Actions.get(h), States[t.index][p.index]);
                             }
@@ -106,7 +116,9 @@ public class TransitionSystem {
             for (var qp : A.Q)
                 if (qp.isInitial) {
                     for (int k = 0; k < qp.Successors.size(); ++k) {
-                        if (same(s.L, qp.labels.get(k))) {
+                        LinkedHashSet<String> st=new LinkedHashSet<>(s.L);
+                        st.retainAll(curAP);
+                        if (same(st, qp.labels.get(k))) {
                             for (var q : qp.Successors.get(k)) {
                                 initial.add(States[s.index][q.index]);
                             }
@@ -124,16 +136,30 @@ public class TransitionSystem {
                 F.add(States[i][f.index]);
     }
 
-    private boolean DFS(State f, State s) {
-        if (s.visit >= 0) return s.visit == f.index;
-        s.visit = f.index;
-        for (var t : s.Successors) if (DFS(f, t)) return true;
+    private boolean DFS2(State f, State s) {
+        if (s.visit2 >= 0) return s.visit2 == f.index;
+        s.visit2 = f.index;
+        for (var t : s.Successors) if (DFS2(f, t)) return true;
         return false;
     }
     //Check Persistency
+    private boolean DFS1(State s){
+        if (s.visit1)return false;
+        s.visit1=true;
+        if(F.contains(s)){
+            if(DFS2(s,s))return true;
+        }
+        for(var t : s.Successors){
+            if(DFS1(t))return true;
+        }
+        return false;
+    }
     public boolean isNFPersistent() {
-        for (var s : States) s.visit = -1;
-        for (var f : F) if (DFS(f, f)) return true;
+        for (var s : States){
+            s.visit1=false;
+            s.visit2 = -1;
+        }
+        for(var i : initial)if(DFS1(i))return true;
         return false;
     }
 
@@ -145,6 +171,7 @@ public class TransitionSystem {
             for(int i=0;i<s.Successors.size();++i){
                 System.out.print("("+s+","+s.Actions.get(i)+","+s.Successors.get(i)+");");
             }
+            System.out.println();
         }
         System.out.println();
     }

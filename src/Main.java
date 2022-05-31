@@ -24,9 +24,10 @@ public class Main {
         NBA A = new NBA(G);
         A.Complement();
         A.print();
-        TransitionSystem TSA = new TransitionSystem(TS, A);
+        TransitionSystem TSA = new TransitionSystem(TS, A,builder.root);
         TSA.print();
         System.out.println(TSA.isNFPersistent() ? "1" : "0");
+        System.out.println();
     }
 
     public static void main(String[] args) throws Exception {
