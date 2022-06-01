@@ -23,6 +23,6 @@ Constant: TRUE | FALSE;
 TRUE : 'true';
 FALSE : 'false';
 
-Identifier : [a-zA-Z]+;
+Identifier : [a-z]+;
 
 Space : [ \t]+ -> skip;

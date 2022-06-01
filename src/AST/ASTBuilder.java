@@ -28,6 +28,16 @@ public class ASTBuilder extends LTLBaseVisitor<ASTNode> {
             root = visitDisjunctionFormula((DisjunctionFormulaContext) ctx);
         else
              throw new Exception("No such formula.");
+        root=new NegationNode(root);
+        boolean hasU=false;
+        for(var node : root.FormulaValue.iterator().next().keySet()){
+            if(node instanceof UntilNode){
+                hasU=true;break;
+            }
+        }
+        if(!hasU){
+            root=new ConjunctionNode(root,new UntilNode(TrueConstant,TrueConstant));
+        }
     }
     @Override
     public ASTNode visitNextFormula(NextFormulaContext ctx){

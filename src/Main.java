@@ -20,14 +20,13 @@ public class Main {
         ASTBuilder builder = new ASTBuilder(parser.formula());
         //builder.printElementarySet();
         GNBA G = new GNBA(builder.root);
-        G.print();
+        //G.print();
         NBA A = new NBA(G);
-        A.Complement();
-        A.print();
+        //A.print();
         TransitionSystem TSA = new TransitionSystem(TS, A,builder.root);
-        TSA.print();
-        System.out.println(TSA.isNFPersistent() ? "1" : "0");
-        System.out.println();
+        //TSA.print();
+        System.out.println(TSA.hasFSCC() ? "0" : "1");
+        //System.out.println();
     }
 
     public static void main(String[] args) throws Exception {

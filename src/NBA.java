@@ -28,9 +28,12 @@ public class NBA {
 
     public NBA(GNBA G) {
         int k = G.F.size();
-        if (k == 0) {
+        /*if (k == 0) {
             Q = new State[G.Q.size()];
-            for (int i = 0; i < Q.length; ++i) Q[i] = new State(G.Q.get(i), 0);
+            for (int i = 0; i < Q.length; ++i){
+                Q[i] = new State(G.Q.get(i), 0);
+                Q[i].index=i;
+            }
             for (int i = 0; i < Q.length; ++i) {
                 for (int j = 0; j < G.Q.get(i).Successors.size(); ++j) {
                     LinkedHashSet<State> SuccessorSet = new LinkedHashSet<>();
@@ -40,7 +43,7 @@ public class NBA {
                 }
             }
             return;
-        }
+        }*/
         int l = G.Q.size();
         State[][] Q = new State[l][k];
         for (int i = 0; i < l; ++i)
@@ -80,13 +83,8 @@ public class NBA {
             }
     }
 
-    public void Complement() {
-        LinkedHashSet<State> newF = new LinkedHashSet<>(Arrays.asList(Q));
-        newF.removeAll(F);
-        F = newF;
-    }
-
     public void print() {
+        System.out.println("NBA:");
         for (var q : Q) {
             for (int i = 0; i < q.Successors.size(); ++i)
                 System.out.print("(" + q + "," + q.labels.get(i) + "," + q.Successors.get(i) + ");");
