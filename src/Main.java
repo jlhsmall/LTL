@@ -31,7 +31,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         TransitionSystem TS = new TransitionSystem("ts.txt");
-        FileReader fr = new FileReader("benchmark.txt");
+        FileReader fr = new FileReader("input.txt");
         BufferedReader br = new BufferedReader(fr);
         ArrayList<Integer> arr = MyInput.ReadIntegerLine(br);
         int q0 = arr.get(0), q1 = arr.get(1);
