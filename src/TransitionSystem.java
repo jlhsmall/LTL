@@ -138,14 +138,17 @@ public class TransitionSystem {
                 F.add(States[i][f.index]);
     }
 
-    private boolean DFS2(State f, State s) {
-        if (s.visit2 >= 0) return s.visit2 == f.index;
-        s.visit2 = f.index;
-        for (var t : s.Successors) if (DFS2(f, t)) return true;
+
+    //Check Persistency
+    public boolean hasFSCC() {
+        for (var s : States) {
+            s.visit1 = false;
+            s.visit2 = -1;
+        }
+        for (var i : initial) if (DFS1(i)) return true;
         return false;
     }
 
-    //Check Persistency
     private boolean DFS1(State s) {
         if (s.visit1) return false;
         s.visit1 = true;
@@ -158,12 +161,10 @@ public class TransitionSystem {
         return false;
     }
 
-    public boolean hasFSCC() {
-        for (var s : States) {
-            s.visit1 = false;
-            s.visit2 = -1;
-        }
-        for (var i : initial) if (DFS1(i)) return true;
+    private boolean DFS2(State f, State s) {
+        if (s.visit2 >= 0) return s.visit2 == f.index;
+        s.visit2 = f.index;
+        for (var t : s.Successors) if (DFS2(f, t)) return true;
         return false;
     }
 

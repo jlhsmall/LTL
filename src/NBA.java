@@ -28,30 +28,18 @@ public class NBA {
 
     public NBA(GNBA G) {
         int k = G.F.size();
-        /*if (k == 0) {
-            Q = new State[G.Q.size()];
-            for (int i = 0; i < Q.length; ++i){
-                Q[i] = new State(G.Q.get(i), 0);
-                Q[i].index=i;
-            }
-            for (int i = 0; i < Q.length; ++i) {
-                for (int j = 0; j < G.Q.get(i).Successors.size(); ++j) {
-                    LinkedHashSet<State> SuccessorSet = new LinkedHashSet<>();
-                    for (var q : G.Q.get(i).Successors.get(j)) SuccessorSet.add(Q[q.index]);
-                    Q[i].Successors.add(SuccessorSet);
-                    Q[i].labels.add(G.Q.get(i).labels.get(j));
-                }
-            }
-            return;
-        }*/
         int l = G.Q.size();
         State[][] Q = new State[l][k];
         for (int i = 0; i < l; ++i)
             for (int j = 0; j < k; ++j)
                 Q[i][j] = new State(G.Q.get(i), j);
+
+        //calculate F
         for (int i = 0; i < l; ++i)
             if (G.F.get(0).contains(Q[i][0].q))
                 F.add(Q[i][0]);
+
+        //transition
         for (int i = 0; i < l; ++i)
             for (int j = 0; j < k; ++j) {
                 if (G.F.get(j).contains(Q[i][j].q)) {
@@ -75,6 +63,8 @@ public class NBA {
                     }
                 }
             }
+
+        //mapping
         this.Q = new State[k * l];
         for (int i = 0; i < l; ++i)
             for (int j = 0; j < k; ++j) {

@@ -18,7 +18,7 @@ The `void solve(TransitionSystem TS)` first builds an AST according to the formu
 This class is created to make inputting easier. `ArrayList<Integer> ReadIntegerLine(BufferedReader br)` reads a line of integers, and `ArrayList<String> ReadStringLine(BufferedReader br)` reads a line of strings.
 
 ###Abstract Syntax Tree
-The Abstract Syntax Tree (AST) is stored in `src/AST`. We use `ASTBuilder.java` to build the tree, and define the class of tree node in `ASTNode`, each of which represents a sub-formula of $\neg\varphi$. The rest classes each represents a certain type of formula, and is derived from `ASTNode`.
+Task 1. The Abstract Syntax Tree (AST) is stored in `src/AST`. We use `ASTBuilder.java` to build the tree, and define the class of tree node in `ASTNode`, each of which represents a sub-formula of $\neg\varphi$. The rest classes each represents a certain type of formula, and is derived from `ASTNode`.
 
 ###GNBA.java
 Task 2. The GNBA can be constructed from an LTL formula (here an AST) according to the textbook.
@@ -27,4 +27,4 @@ Task 2. The GNBA can be constructed from an LTL formula (here an AST) according 
 Task 3. The NBA can be constructed from a GNBA according to the textbook.
 
 ###TransitionSystem.java
-The transition system can be constructed from a file input, which is realized in `TransitionSystem(String file)`; or we can do the product construction, which is realized in `TransitionSystem(TransitionSystem TS, NBA A, ASTNode root)`. To do persistence checking, just call `boolean hasFSCC()`, and reverse the result.    
+The transition system can be constructed from a file input, which is realized in `TransitionSystem(String file)`; or we can do the product construction (Task 4), which is realized in `TransitionSystem(TransitionSystem TS, NBA A, ASTNode root)`. To do persistence checking (Task 5), just call `boolean hasFSCC()`, and reverse the result.    
