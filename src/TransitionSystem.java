@@ -176,7 +176,7 @@ public class TransitionSystem {
             for (int i = 0; i < s.Successors.size(); ++i) {
                 System.out.print("(" + s + "," + s.Actions.get(i) + "," + s.Successors.get(i) + ");");
             }
-            System.out.println();
+            //System.out.println();
         }
         System.out.println();
     }

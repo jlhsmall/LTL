@@ -26,7 +26,7 @@ public class Main {
         TransitionSystem TSA = new TransitionSystem(TS, A,builder.root);
         //TSA.print();
         System.out.println(TSA.hasFSCC() ? "0" : "1");
-        //System.out.println();
+        System.out.println();
     }
 
     public static void main(String[] args) throws Exception {
